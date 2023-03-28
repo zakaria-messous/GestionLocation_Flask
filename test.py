@@ -1,5 +1,9 @@
 
+
+cars = []
 # Description: This is a test file
+
+
 class Car:
     def __init__(self, id, model, marque, year, plate, price):
         self.id = id
@@ -54,5 +58,70 @@ class Car:
         print("price : ", self.get_price())
 
 
-car1 = Car(1, "X5", "BMW", 2020, "ABC123", 50000)
-car1.display()
+def add_car(cars):
+    id = input("Enter Id")  # auto increment id
+    model = input("Enter Model")
+    marque = input("Enter Marque")
+    year = input("Enter Year")
+    plate = input("Enter Plate")
+    price = input("Enter Price")
+    carx = Car(id, model, marque, year, plate, price)
+
+    cars.append(carx)
+    return cars
+
+
+def display_all(cars):
+    for car in cars:
+        car.display()
+
+
+def update(cars):
+    id = input("Enter Id")
+    for car in cars:
+        if car.get_id() == id:
+            model = input("Enter Model")
+            marque = input("Enter Marque")
+            year = input("Enter Year")
+            plate = input("Enter Plate")
+            price = input("Enter Price")
+            car.set_model(model)
+            car.set_marque(marque)
+            car.set_year(year)
+            car.set_plate(plate)
+            car.set_price(price)
+            return cars
+
+
+def delete(cars):
+    id = input("Enter Id")
+    for car in cars:
+        if car.get_id() == id:
+            cars.remove(car)
+            return cars
+
+
+def search(cars):
+    id = input("Enter Id")
+    for car in cars:
+        if car.get_id() == id:
+            car.display()
+            return cars
+
+
+def menu():
+    print("1- Add Car")
+    print("2- Display All")
+    print("3- Update")
+    print("4- Delete")
+    print("5- Search")
+    print("6- Exit")
+    choice = input("Enter your choice")
+    return choice
+
+
+add_car(cars)
+add_car(cars)
+display_all(cars)
+update(cars)
+display_all(cars)
