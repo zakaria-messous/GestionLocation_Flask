@@ -1,9 +1,13 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template
+from flask_mysqldb import MySQL
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///market.db'
-app.config['SECRET_KEY'] = 'a19a4a9edf2afe9c6734a081'
-db = SQLAlchemy(app)
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'location_voiture'
+app.secret_key = 'your_secret_key_here'
+
+mysql = MySQL(app)
 
 from market import routes
