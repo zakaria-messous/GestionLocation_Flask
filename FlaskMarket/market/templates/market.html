@@ -29,7 +29,7 @@ Market Page
             <td>
                 <button class="btn btn-outline btn-info">More Info</button>
                 <button class="btn btn-outline btn-success" >Purchase</button>
-                <a href="{{ url_for('delete_car', item_id=item[0]) }}" class="btn btn-outline btn-danger">Delete</a>
+                <a href="{{ url_for('delete_car', item_id=item[0]) }}" class="btn btn-outline btn-danger" onclick="return confirm('Sur ?')">Delete</a>
             </td>
         </tr>
         {% endfor %}
