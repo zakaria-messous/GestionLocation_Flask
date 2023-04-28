@@ -26,7 +26,6 @@ class ContractForm(FlaskForm):
     ville = StringField(label='Ville', validators=[DataRequired()])
     zip = IntegerField(label='Zip', validators=[ DataRequired()])
 
-
 class PaymentForm(FlaskForm):
     nom_carte = StringField(label='Nom sur la carte', validators=[DataRequired()])
     numero_carte = IntegerField(label='Numero de la carte', validators=[DataRequired(), Length(min=16, max=16, message='The card number should be 16 digits long.'), Regexp('^[0-9]*$', message='The card number should contain only digits.')])
