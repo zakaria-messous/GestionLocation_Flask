@@ -11,10 +11,14 @@ Market Page
         <tr>
             <!-- Your Columns HERE -->
             <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Barcode</th>
-            <th scope="col">Price</th>
-            <th scope="col">Options</th>
+            <th scope="col">Marque</th>
+            <th scope="col">model</th>
+            <th scope="col">Carburant</th>
+            <th scope="col">Nbr_Places</th>
+            <th scope="col">Transmission</th>
+            <th scope="col">Prix</th>
+            <th scope="col">Disponibilite</th>
+            <th scope="col">Matricule</th>
         </tr>
     </thead>
     <tbody>
@@ -26,9 +30,17 @@ Market Page
             <td>{{ item[2] }}</td>
             <td>{{ item[3] }}</td>
             <td>{{ item[4] }}</td>
+            <td>{{ item[5] }}</td>
+            <td>{{ item[6] }}</td>
+            <td>{{ item[7] }}</td>
+            <td>{{ item[8] }}</td>
             <td>
-                <button class="btn btn-outline btn-info">More Info</button>
-                <button class="btn btn-outline btn-success" >Purchase</button>
+                {% if item[7] == 1 %}
+    <button class="btn btn-outline btn-info" onclick="location.href='{{ url_for('switch_availability', item_id=item[0], availability=0) }}';">Switch Availability</button>
+    {% else %}
+    <button class="btn btn-outline btn-success" onclick="location.href='{{ url_for('switch_availability', item_id=item[0], availability=1) }}';">Switch Availability</button>
+    {% endif %}
+
                 <a href="{{ url_for('delete_car', item_id=item[0]) }}" class="btn btn-outline btn-danger" onclick="return confirm('Sur ?')">Delete</a>
             </td>
         </tr>
