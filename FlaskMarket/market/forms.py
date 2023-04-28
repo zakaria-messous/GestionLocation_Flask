@@ -35,9 +35,9 @@ class PaymentForm(FlaskForm):
     submit = SubmitField(label='Payer')
 
 class RegisterForm(FlaskForm):
-    def __init__(self, mysql=None, *args, **kwargs):
-        super(RegisterForm, self).__init__(*args, **kwargs)
-        self.mysql = mysql
+    # def __init__(self, mysql=None, *args, **kwargs):
+    #     super(RegisterForm, self).__init__(*args, **kwargs)
+    #     self.mysql = mysql
 
     def validate_username(self, username_to_check):
         login = Login(1,'username', 'mail', 'password')
