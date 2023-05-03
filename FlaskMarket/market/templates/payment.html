@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
-  <head><script src="../assets/js/color-modes.js"></script>
+  <head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -110,34 +110,34 @@
 <div class="container">
   <main>
     <div class="py-5 text-center">
-      <img class="d-block mx-auto mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+      <img class="d-block mx-auto mb-4" src="{{ url_for('image', filename='confirmation.png' ) }}" alt="" width="72" height="57">
       <h2>Checkout form</h2>
-      <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+      <p class="lead">Below is an example form built entirely with form controls using Python. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
     </div>
     <div class="row g-5">
       <div class="row g-5">
         <div class="col-md-5 col-lg-4 order-md-last">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
-                <span class="text-primary">{{ car_data[1] }}</span>
-                <span class="badge bg-primary rounded-pill">{{ car_data[2] }}</span>
+                <span class="text-primary">{{ car_data.marque }}</span>
+                <span class="badge bg-primary rounded-pill">{{ car_data.model }}</span>
             </h4>
             <ul class="list-group mb-3">
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                     <div>
-                        <h6 class="my-0">{{ car_data[3] }}</h6>
+                        <h6 class="my-0">{{ car_data.type_carburant }}</h6>
                         
                     </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                     <div>
-                        <h6 class="my-0">{{ car_data[5] }}</h6>
+                        <h6 class="my-0">{{ car_data.transmission }}</h6>
                         
                     </div>
                     
                 </li>
                 <li class="list-group-item d-flex justify-content-between">
                     <span>Total (USD)</span>
-                    <strong>{{ car_data[6] }}</strong>
+                    <strong>{{ car_data.prix_location }}</strong>
                 </li>
             </ul>
         </div>
@@ -228,56 +228,93 @@
           <hr class="my-4">
           
           <h4 class="mb-3">Payment</h4>
-
-          <div class="my-3">
-            <div class="form-check">
-              <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
-              <label class="form-check-label" for="credit">Credit card</label>
-            </div>
-            <div class="form-check">
-              <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
-              <label class="form-check-label" for="paypal">Cash</label>
-            </div>
+<br>
+          <!-- radio buttons for payment method -->
+          <div class="form-group">
+            <label class="form-check-label">
+              <input type="radio" name="payment_method" value="credit_card" class="form-check-input payment-method" checked>Pay with credit card
+            </label>
+            <br>
+            <label class="form-check-label">
+              <input type="radio" name="payment_method" value="cash" class="form-check-input payment-method" id="cash-radio">Pay with cash
+            </label>
           </div>
-
-          <div class="row gy-3">
+          <br><br>
+          
+          <div class="payment-form-container row gy-3" name="payment_method">
             <div class="col-md-6">
               {{ form2.nom_carte.label(class="form-label") }}
-            {{ form2.nom_carte(type="text", class="form-control", placeholder="Name On Card") }}
-            <div class="invalid-feedback">
-              Please enter a valid email address for shipping updates.
+              {{ form2.nom_carte(type="text", class="form-control", placeholder="Name On Card") }}
+              <div class="invalid-feedback">
+                Please enter a valid email address for shipping updates.
+              </div>
             </div>
-            </div>
-
+          
             <div class="col-md-6">
               {{ form2.numero_carte.label(class="form-label") }}
-            {{ form2.numero_carte(type="number", class="form-control", placeholder="Number On Card") }}
-            <div class="invalid-feedback">
-              Please enter a valid email address for shipping updates.
+              {{ form2.numero_carte(type="number", class="form-control", placeholder="Number On Card") }}
+              <div class="invalid-feedback">
+                Please enter a valid email address for shipping updates.
+              </div>
             </div>
-            </div>
-
+          
             <div class="col-md-3">
               {{ form2.expiration.label(class="form-label") }}
-            {{ form2.expiration(type="date", class="form-control" ) }}
-            <div class="invalid-feedback">
-              Please enter a valid email address for shipping updates.
+              {{ form2.expiration(type="date", class="form-control" ) }}
+              <div class="invalid-feedback">
+                Please enter a valid email address for shipping updates.
+              </div>
             </div>
-            </div>
-
+          
             <div class="col-md-3">
               {{ form2.cvv.label(class="form-label") }}
-            {{ form2.cvv(type="number", class="form-control") }}
-            <div class="invalid-feedback">
-              Please enter a valid email address for shipping updates.
+              {{ form2.cvv(type="number", class="form-control") }}
+              <div class="invalid-feedback">
+                Please enter a valid email address for shipping updates.
+              </div>
             </div>
-            </div>
-            
           </div>
-
+          <div class="confirm-message hidden">
+            <p>Please call 123-456-7890 to confirm your rental.</p>
+          </div>
           <hr class="my-4">
-
+          
           {{ form2.submit(class="btn btn-primary btn-lg w-30") }}
+          
+          <script>
+            const cashRadio = document.getElementById('cash-radio');
+            const creditCardRadio = document.querySelector('input[value="credit_card"]');
+            const paymentFormContainer = document.querySelector('.payment-form-container');
+            const confirmationMessage = document.querySelector('.confirm-message');
+          
+            cashRadio.addEventListener('change', function() {
+              if (cashRadio.checked) {
+                paymentFormContainer.classList.add('hidden');
+                confirmationMessage.classList.remove('hidden');
+              }
+            });
+          
+            creditCardRadio.addEventListener('change', function() {
+              if (creditCardRadio.checked) {
+                paymentFormContainer.classList.remove('hidden');
+                confirmationMessage.classList.add('hidden');
+              }
+            });
+          </script>
+          
+          
+          <style>
+            .confirm-message {
+              display: block;
+            }
+            .hidden {
+              display: none;
+              }
+          .hidden {
+            display: none;
+          }
+          </style>
+          
         </form>
       </div>
     </div>

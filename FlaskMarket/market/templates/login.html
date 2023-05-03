@@ -35,37 +35,28 @@
             <div class="row justify-content-center">
               <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Login</p>
 <div class="d-flex justify-content-center">
                         
                       </div>
-                <form class="form-register" method="POST" action="{{ url_for('register_page') }}" enctype="multipart/form-data" >
+                <form class="form-register" method="POST" action="{{ url_for('login_page') }}" enctype="multipart/form-data" >
                       {{ form.csrf_token }}
                       
                   {{ form.username.label() }}
                   <div class="d-flex flex-row align-items-center mb-4">
                     {{ form.username(class="form-control", placeholder="Enter Your Username") }}
                   </div>
-                  
 
-                  {{ form.mail.label() }}
+                  {{ form.password.label() }}
                   <div class="d-flex flex-row align-items-center mb-4">
-                    {{ form.mail(class="form-control", placeholder="Enter Your Email") }}
+                    {{ form.password(class="form-control", placeholder="Enter Your Password") }}
                   </div>
                   
-                  {{ form.password1.label() }}
-                  <div class="d-flex flex-row align-items-center mb-4">
-                    {{ form.password1(class="form-control", placeholder="Enter a Password") }}
-                  </div>
                   
-                  {{ form.password2.label() }}
-                  <div class="d-flex flex-row align-items-center mb-4">
-                    {{ form.password2(class="form-control", placeholder="Repeat Your Password") }}
-                  </div>
                   
                   {{ form.submit(class="btn btn-primary btn-lg w-100") }}
 
-                  <a href="{{ url_for('login_page') }}">Already have an Account ? Login Here...</a>
+                  <a href="{{ url_for('register_page') }}">Don't have an Account ? Register Here...</a>
 
                 </form>
 

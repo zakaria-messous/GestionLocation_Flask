@@ -4,6 +4,7 @@ Add Car Page
 {% endblock %}
 
 {% block content %}
+
 <div class="d-flex justify-content-center">
     <form class="form-register" method="post" action="{{ url_for('add_car') }}"  enctype="multipart/form-data">
         {{ form.csrf_token }}
@@ -55,5 +56,10 @@ Add Car Page
         {{ form.submit(class="btn btn-primary btn-lg w-40") }}
     </form>
 </div>
-
+<style>
+    body {
+    background-color: #212121;
+    color: white
+    }
+ </style>
 {% endblock %}
